@@ -14,10 +14,10 @@ function randFrac(nMax, dMax) {
     let nRes, dRes;
     
     do {
-        nRes, dRes = randInt(1, nMax), randInt(2, dMax);
+        [nRes, dRes] = [randInt(1, nMax), randInt(2, dMax)];
     } while (gcd(nRes, dRes) != 1);
 
-    return nRes, dRes;
+    return [nRes, dRes];
 }
 
 function randElement(list) {

@@ -5,34 +5,55 @@
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script src="../utils.js"></script>
         <script>
+            let f1n, f1d, f2n, f2d;
+            let operation;
             let result;
+            let n1 = 0;
+            let n2 = 0;
 
             function generate() {
-                let f1n, f1d, f2n, f2d;
+                [f1n, f1d] = randFrac(10, 20);
+                [f2n, f2d] = randFrac(10, 20);
 
-                const equation = document.getElementById("equation");
-
-                f1n, f1d = randFrac(10, 20);
-                f2n, f2d = randFrac(10, 20);
-
-                const operation = randElement([
-                    ["+",function(x,y){x+y}],
-                    ["-",function(x,y){x-y}],
-                    ["*",function(x,y){x*y}],
-                    [":",function(x,y){x/y}]
-                ]);
+                operation = randElement([
+                    ["+",function(x,y){return x+y}],
+                    ["-",function(x,y){return x-y}],
+                    ["\\cdot",function(x,y){return x*y}],
+                    ["\\div",function(x,y){return x/y}]
+                ]);            
 
                 result = operation[1](f1n / f1d, f2n / f2d);
 
-                equation.innerHTML = "\(\frac{" + f1n + "}{" + f1d + "}" + operation[0] + "\frac{" + f2n + "}{" + f2d + "}=\frac ab\)";
+                update()
+            }
 
-                return "\(\frac{" + f1n + "}{" + f1d + "}" + operation[0] + "\frac{" + f2n + "}{" + f2d + "}=\frac ab\)";
+            function update() {
+                n1 = document.getElementById("n1").valueAsNumber;
+                n2 = document.getElementById("n2").valueAsNumber;
+
+                if (!isInt(n1)) {
+                    n1 = "a"
+                }
+                if (!isInt(n2)) {
+                    n2 = "b"
+                }
+
+                regenerate()
+            }
+
+            function regenerate() {
+                const equation = document.getElementById("equation");
+
+                equation.innerHTML =
+                "$$\\frac{" + f1n + "}{" + f1d + "}" +
+                operation[0] +
+                "\\frac{" + f2n + "}{" + f2d + "}=\\frac{" +
+                n1 + "}{" + n2 + "}$$";
+
+                MathJax.typeset();
             }
 
             function verify() {
-                const n1 = document.getElementById("n1").valueAsNumber;
-                const n2 = document.getElementById("n2").valueAsNumber;
-                
                 if (!isInt(n1) || !isInt(n2)) {
                     alert("Tienen que ser numeros enteros.");
                     return;
@@ -46,10 +67,11 @@
             }
         </script>
     </head>
-    <body>
+    <body onload="generate()">
+        <h1> Fracciones </h1>
         <p id="equation"></p>
-        <input id="n1" type="number" placeholder="a"/>
-        <input id="n2" type="number" placeholder="b"/>
+        <input id="n1" type="number" placeholder="a" onchange="update()"/>
+        <input id="n2" type="number" placeholder="b" onchange="update()"/>
         <button onclick="verify()"> Comprobar </button>
     </body>
 </html>
