@@ -15,7 +15,7 @@ function randFrac(nMax, dMax) {
     
     do {
         nRes, dRes = randInt(1, nMax), randInt(2, dMax);
-    } while (gcd(nRes, dRes));
+    } while (gcd(nRes, dRes) != 0);
 
     return nRes, dRes;
 }
