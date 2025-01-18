@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Clases con Leo </title>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../utils.js"></script>
+        <script>
+            let result;
+
+            function generate() {
+                let f1n, f1d, f2n, f2d;
+
+                const equation = document.getElementById("equation");
+
+                f1n, f1d = randFrac(10, 20);
+                f2n, f2d = randFrac(10, 20);
+
+                const operation = randElement([
+                    ["+",function(x,y){x+y}],
+                    ["-",function(x,y){x-y}],
+                    ["*",function(x,y){x*y}],
+                    [":",function(x,y){x/y}]
+                ]);
+
+                result = operation[1](f1n / f1d, f2n / f2d);
+
+                equation.innerHTML = "\(\frac{" + f1n + "}{" + f1d + "}" + operation[0] + "\frac{" + f2n + "}{" + f2d + "}=\frac ab\)";
+
+                return "\(\frac{" + f1n + "}{" + f1d + "}" + operation[0] + "\frac{" + f2n + "}{" + f2d + "}=\frac ab\)";
+            }
+
+            function verify() {
+                const n1 = document.getElementById("n1").valueAsNumber;
+                const n2 = document.getElementById("n2").valueAsNumber;
+                
+                if (!isInt(n1) || !isInt(n2)) {
+                    alert("Tienen que ser numeros enteros.");
+                    return;
+                }
+
+                if (n1 / n2 == result) {
+                    alert("Correcto!");
+                } else {
+                    alert("Incorrecto!");
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <p id="equation"></p>
+        <input id="n1" type="number" placeholder="a"/>
+        <input id="n2" type="number" placeholder="b"/>
+        <button onclick="verify()"> Comprobar </button>
+    </body>
+</html>
