@@ -1,0 +1,8 @@
+@font-face {
+    font-family: PlayWriteIN;
+    src: url("assets/PlayWriteIN.ttf");
+}
+
+body {
+    font-family: PlayWriteIN;
+}
