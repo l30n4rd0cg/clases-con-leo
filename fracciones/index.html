@@ -58,8 +58,11 @@
             }
 
             function verify() {
+                //correction = document.getElementById("correct");
+
                 if (!isInt(n1) || !isInt(n2)) {
-                    alert("Tienen que ser numeros enteros.");
+                    //correction.innerHTML = "Tienen que ser n&uacute;meros enteros";
+                    alert("Tienen que ser numeros enteros")
                     return;
                 }
 
@@ -73,9 +76,20 @@
     </head>
     <body onload="generate()">
         <h1> Fracciones </h1>
+
         <p id="equation"></p>
+
         <input id="n1" type="number" placeholder="a" onchange="update()"/>
         <input id="n2" type="number" placeholder="b" onchange="update()"/>
+
         <button onclick="verify()"> Comprobar </button>
+        <button onclick="generate()"> Generar </button>
+
+        <br/>
+
+        <!--<div id="correction_parent">
+            <p id="correction"></p>
+        </div>-->
+
     </body>
 </html>
