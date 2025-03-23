@@ -3,81 +3,20 @@
     <head>
         <title> Clases con Leo </title>
 
-        <link rel="stylesheet" href="../style.css">
+        <meta charset="utf8" />
+
+        <link rel="stylesheet" href="../css/style.css">
         
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="../utils.js"></script>
 
-        <script>
-            let f1n, f1d, f2n, f2d;
-            let operation;
-            let result;
-            let n1 = 0;
-            let n2 = 0;
-
-            function generate() {
-                [f1n, f1d] = randFrac(10, 20);
-                [f2n, f2d] = randFrac(10, 20);
-
-                operation = randElement([
-                    ["+",function(x,y){return x+y}],
-                    ["-",function(x,y){return x-y}],
-                    ["\\cdot",function(x,y){return x*y}],
-                    ["\\div",function(x,y){return x/y}]
-                ]);            
-
-                result = operation[1](f1n / f1d, f2n / f2d);
-
-                update()
-            }
-
-            function update() {
-                n1 = document.getElementById("n1").valueAsNumber;
-                n2 = document.getElementById("n2").valueAsNumber;
-
-                if (!isInt(n1)) {
-                    n1 = "a"
-                }
-                if (!isInt(n2)) {
-                    n2 = "b"
-                }
-
-                regenerate()
-            }
-
-            function regenerate() {
-                const equation = document.getElementById("equation");
-
-                equation.innerHTML =
-                "$$\\frac{" + f1n + "}{" + f1d + "}" +
-                operation[0] +
-                "\\frac{" + f2n + "}{" + f2d + "}=\\frac{" +
-                n1 + "}{" + n2 + "}$$";
-
-                MathJax.typeset();
-            }
-
-            function verify() {
-                //correction = document.getElementById("correct");
-
-                if (!isInt(n1) || !isInt(n2)) {
-                    //correction.innerHTML = "Tienen que ser n&uacute;meros enteros";
-                    alert("Tienen que ser numeros enteros")
-                    return;
-                }
-
-                if (n1 / n2 == result) {
-                    alert("Correcto!");
-                } else {
-                    alert("Incorrecto!");
-                }
-            }
-        </script>
+        <script src="../js/mathUtils.js"></script>
+        <script src="../js/activities.js"></script>
+        <script src="./fracciones.js"></script>
     </head>
-    <body onload="generate()">
+    <body onload="init()">
         <h1> Fracciones </h1>
 
-        <p id="equation"></p>
+        <p id="equation" class="math"></p>
 
         <input id="n1" type="number" placeholder="a" onchange="update()"/>
         <input id="n2" type="number" placeholder="b" onchange="update()"/>
@@ -87,9 +26,9 @@
 
         <br/>
 
-        <!--<div id="correction_parent">
-            <p id="correction"></p>
-        </div>-->
+        <div id="correction_parent">
+            <p id="correction" class="correction_default"></p>
+        </div>
 
     </body>
 </html>

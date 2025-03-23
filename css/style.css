@@ -1,0 +1,43 @@
+:root {
+    --main-bg-color: #86d1c7;
+
+    --correction-bg-color: #aaa;
+    --correction-wrong-color: #f22;
+    --correction-right-color: #2f2;
+    --correction-error-color: #dd2;
+}
+
+@font-face {
+    font-family: PlayWriteIN;
+    src: url("../assets/PlayWriteIN.ttf");
+}
+
+body {
+    font-family: PlayWriteIN;
+    background-color: var(--main-bg-color);
+}
+
+#correction_parent {
+    background-color: var(--correction-bg-color);
+
+    width: 100%;
+    height: 50px;
+
+    border-radius: 10px;
+}
+
+#correction {
+    text-align: center;
+}
+
+.correction_wrong {
+    color: var(--correction-wrong-color);
+}
+
+.correction_right {
+    color: var(--correction-right-color);
+}
+
+.correction_error {
+    color: var(--correction-error-color);
+}
