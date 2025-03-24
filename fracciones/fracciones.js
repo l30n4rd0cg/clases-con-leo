@@ -38,10 +38,12 @@ function regenerate() {
     const equation = document.getElementById("equation");
 
     equation.innerHTML =
-        "$$\\frac{" + f1n + "}{" + f1d + "}" +
-        operation[0] +
-        "\\frac{" + f2n + "}{" + f2d + "}=\\frac{" +
-        n1 + "}{" + n2 + "}$$";
+        `$$
+        \\frac{${f1n}}{${f1d}}
+        ${operation[0]}
+        \\frac{${f2n}}{${f2d}} = 
+        \\frac{${n1}}{${n2}}
+        $$`;
 
     MathJax.typeset();
 }
