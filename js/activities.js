@@ -15,6 +15,8 @@ function init() {
     correctionP = document.getElementById("correction");
 
     showMsg();
+
+    generate();
 }
 
 function showMsg() {
@@ -45,11 +47,59 @@ function correctionError(correction) {
 }
 
 function check() {
-    let corrected = verify();
+    let inputs = getInputs();
+
+    for (let idx = 0; idx < inputs.length; idx++) {
+        const input = inputs[idx];
+        const error = checkInput(input, idx);
+
+        if (error) {
+            correctionError(error);
+            return;
+        }
+    }
+
+    let right = verifyAnswer();
+    
+    if (right) {
+        correctionRight(Correction.Right);
+    } else {
+        correctionWrong(Correction.Wrong);
+    }
 }
 
 function checkInput(input, inputNumber) {
-
+    let properties = correctionProperties[inputNumber];
+    for (const property of properties) {
+        switch (property) {
+            case Correction.MustBeNumber:
+                if (!isNumber(input)) {
+                    return Correction.MustBeNumber;
+                }
+                break;
+            
+            case Correction.MustBeInt:
+                if (!isInt(input)) {
+                    return Correction.MustBeInt;
+                }
+                break;
+            
+            case Correction.MustBePositive:
+                if (input < 0) {
+                    return Correction.MustBePositive;
+                }
+                break;
+            
+            case Correction.MustBeNegative:
+                if (input > 0) {
+                    return Correction.MustBeNegative;
+                }
+                break;
+        
+            default:
+                break;
+        }
+    }
 }
 
 function secret() {

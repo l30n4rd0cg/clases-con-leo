@@ -49,19 +49,22 @@ function regenerate() {
 const correctionProperties = [
     [
         Correction.MustBeInt
+    ],
+    [
+        Correction.MustBeInt
     ]
 ];
 
-function verify() {
-    
-    if (!isInt(n1) || !isInt(n2)) {
-        //correction.innerHTML = "Tienen que ser n&uacute;meros enteros";
-        return "Tienen que ser numeros enteros";
-    }
+function getInputs() {
+    return [
+        n1, n2
+    ];
+}
 
-    if (n1 / n2 == result) {
-        alert("Correcto!");
+function verifyAnswer() {
+    if (Math.abs(n1 / n2 - result) < 0.01) {
+        return true;
     } else {
-        alert("Incorrecto!");
+        return false;
     }
 }

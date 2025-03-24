@@ -24,6 +24,10 @@ function randElement(list) {
     return list[randInt(0, list.length)]
 }
 
+function isNumber(x) {
+    return typeof(x) == "number"
+}
+
 function isInt(x) {
     return x == Math.floor(x)
 }
