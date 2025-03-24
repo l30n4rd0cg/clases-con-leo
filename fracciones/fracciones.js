@@ -21,20 +21,6 @@ function generate() {
 }
 
 function update() {
-    n1 = document.getElementById("n1").valueAsNumber;
-    n2 = document.getElementById("n2").valueAsNumber;
-
-    if (!isInt(n1)) {
-        n1 = "a"
-    }
-    if (!isInt(n2)) {
-        n2 = "b"
-    }
-
-    regenerate()
-}
-
-function regenerate() {
     const equation = document.getElementById("equation");
 
     equation.innerHTML =
